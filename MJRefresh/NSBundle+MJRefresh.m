@@ -11,14 +11,22 @@
 #import "MJRefreshConfig.h"
 
 @implementation NSBundle (MJRefresh)
+static NSBundle *refreshBundle = nil;
+static NSBundle *bundle = nil;
+
 + (instancetype)mj_refreshBundle
 {
-    static NSBundle *refreshBundle = nil;
+    
     if (refreshBundle == nil) {
         // 这里不使用mainBundle是为了适配pod 1.x和0.x
         refreshBundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[MJRefreshComponent class]] pathForResource:@"MJRefresh" ofType:@"bundle"]];
     }
     return refreshBundle;
+}
+
++ (void)mj_resetBundle {
+    refreshBundle = nil;
+    bundle = nil;
 }
 
 + (UIImage *)mj_arrowImage
@@ -45,7 +53,7 @@
 
 + (NSString *)mj_localizedStringForKey:(NSString *)key value:(NSString *)value
 {
-    static NSBundle *bundle = nil;
+    
     if (bundle == nil) {
         NSString *language = MJRefreshConfig.defaultConfig.languageCode;
         // 如果配置中没有配置语言

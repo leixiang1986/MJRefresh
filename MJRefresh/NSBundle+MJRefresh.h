@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)mj_trailArrowImage;
 + (NSString *)mj_localizedStringForKey:(NSString *)key value:(nullable NSString *)value;
 + (NSString *)mj_localizedStringForKey:(NSString *)key;
+///应用内切换语言
++ (void)mj_resetBundle;
 @end
 
 NS_ASSUME_NONNULL_END
